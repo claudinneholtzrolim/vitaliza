@@ -72,6 +72,16 @@ Verificação das regras: `.venv/bin/python -m unittest discover -s tests -v`.
 
 Os resultados não incluem clusters, previsão futura, uplift ou ROI. O PDF de leitura, quando exportado, acompanha a síntese e não substitui as tabelas e o método.
 
+## Valor e priorização, responsabilidade transferida para John
+
+Em 03/11/2026, John informou a saída de Marcela do curso e assumiu sua entrega. Os encaminhamentos da S5 associavam essa frente a valor e priorização. O escopo adotado cobre contribuição por plano/canal, custos e limites do CRM, cenários de equilíbrio e critérios para integrar os clusters. Não foi localizada uma rubrica original mais detalhada dessa frente.
+
+**Status em 03/11/2026:** preparação da frente financeira concluída por John, com 16 testes aprovados e três conferências diretas de pagamentos. [Escopo, responsabilidades e instruções para o grupo](docs/entregas/valor_priorizacao_s5.md).
+
+Reprodução, após a preparação da base: `.venv/bin/python src/valor_priorizacao_s5.py`. Leitura: `dados/saidas/s5_valor_priorizacao/John_Valor_Priorizacao_S5.md`; integração ao texto coletivo: `sintese_para_relatorio.md` na mesma pasta. PDF opcional no macOS: `swift src/exportar_valor_s5.swift`.
+
+Bases individuais, relatórios, auditoria e tabelas permanecem em `dados/`, ignorado no Git, conforme a revisão do grupo no PR #4. O GitHub concentra código, decisões, instruções e o registro da transferência de responsabilidade. Os cenários distinguem contribuição equivalente da carteira de valor incremental de uma intervenção. Clusters, efeito das ações e priorização individual continuam como dependências para consolidar a decisão de retenção.
+
 ## Como montar os dados
 
 `dados/` não é versionado. Depois de clonar:

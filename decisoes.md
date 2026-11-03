@@ -32,6 +32,18 @@ Todo problema de qualidade ou regra de cálculo entra na tabela: uma linha por d
 
 ## Detalhes
 
+### Valor e priorização assumidos por John (03/11/2026)
+
+John informou que Marcela trancou o curso e transferiu sua entrega para ele. Os encaminhamentos locais da S5 vinculavam Marcela a valor e priorização; esse é o escopo adotado, sem atribuir a ela uma rubrica adicional não encontrada. Código: `src/valor_priorizacao_s5.py`. Resultados em `dados/saidas/s5_valor_priorizacao/`, fora do Git.
+
+| Data | Arquivo | Dimensão | Problema | Decisão | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-03 | pagamentos × base do corte | Regra | Valor de carteira pode ser confundido com receita ou LTV | Usar última cobrança aprovada equivalente mensal, menos taxas e R$ 4,20/mês; nomear contribuição aproximada | Mensal integral, anual / 12; manter tarifa promocional observada; não afirmar receita incremental do período já pago | 14.753 pagantes; todas as cobranças finais conciliadas à base anterior | John + Codex |
+| 2026-11-03 | pagamentos | Temporalidade / Unicidade | Duplicatas e fusos podem alterar última cobrança | Recalcular a partir do bruto, sem testes, anterior ao limite, somente aprovados, uma cobrança por user_id + horário local + valor | Corte exclusivo 01/10/2026 em Brasília; contagens em filtros.csv e qualidade_financeira.csv | Contagens e três conferências em dados/; brutos preservados | John + Codex |
+| 2026-11-03 | base de valor | Regra | Clusters e efeito individual ainda indisponíveis | Manter campos ausentes; não criar fila operacional ou classificação de persuadíveis | Integração posterior por user_id um para um, com cobertura integral | 14.753 linhas | John + Codex |
+| 2026-11-03 | cenários de retenção | Regra | Risco de churn não mede retorno do contato | Exigir valor incremental positivo após contato, oferta e IA; horizontes 1/3/6 meses e uplift ilustrativo não são previsões | Meses pagos adicionais ao contrafactual; não monetizar período já contratado; não extrapolar push/e-mail para CS/WhatsApp | 288 cenários de plano/canal/tarifa/horizonte/ação/custo de IA | John + Codex |
+| 2026-11-03 | orçamento CRM | Regra | Compromissos de oferta podem exceder orçamento ou ser contados novamente | Reserva integral de R$ 35,91 ou R$ 25 por oferta; separar compromisso de fluxo mensal; reservas IA são hipóteses | R$ 40 mil/mês, WhatsApp 1.500, CS 300, push 1/semana; alternativa mensal ou anual não é soma | Três cenários de reserva de IA; custo real de IA ainda não cotado | John + Codex |
+
 ### Preparação e diagnóstico de John — S5 (27/10/2026)
 
 As decisões abaixo implementam a contribuição aprovada de preparação, integração e diagnóstico. Não substituem decisões de clusterização, personas ou priorização final das outras frentes. Execução: `src/preparar_diagnostico_s5.py`; resultados e critérios em `dados/saidas/s5_john/`.

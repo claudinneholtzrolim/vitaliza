@@ -167,7 +167,7 @@ def main():
         ['Leonardo','Base por pagante, 17 variáveis candidatas e dicionário; selecionar, tratar ausências e validar os grupos.'],
         ['Claudinne','Filtros, auditoria por coluna, alertas e decisões de tratamento.'],
         ['Kiril','Diagnóstico e hipóteses; personas dependem dos clusters e de evidências observadas.'],
-        ['Marcela','Plano, canal, indicadores e aproximações financeiras identificadas; completar custos e valor.'],
+        ['John (valor)','Desde 03/11/2026, assumiu a frente de Marcela. Preparação financeira e critérios em src/valor_priorizacao_s5.py.'],
         ['John','Síntese editável, método, tabelas, gráficos e roteiro de estudo para integrar o relatório.'],
     ],[85,405]))
     story.append(Spacer(1,5*mm))

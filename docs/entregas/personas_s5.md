@@ -3,7 +3,7 @@
 **Autoria das personas, nomes provisórios, hipóteses e propostas de ação: Kiril + Claude — Grupo 01.**
 Revisão técnica e reprodução das conferências: John Neto (apoio de Codex), em 07/11/2026.
 Clusterização de Leonardo; preparação da base e frente financeira de John.
-Esta versão aguarda a aprovação de Kiril e do grupo. Integração condicionada à revisão do PR.
+Versão de trabalho S5 revisada tecnicamente por Codex por delegação explícita de John. Esse aceite técnico não representa assinatura autoral adicional de Kiril ou dos demais colegas. A integração à main obedece à revisão exigida pelo GitHub.
 
 ## Escopo e evidência
 
@@ -165,12 +165,12 @@ e usar características anteriores ao tratamento.
   estabilidade por reamostragem foi reproduzida (ARI médio 0,990; mínimo 0,984).
   Isso não demonstra estabilidade ao longo do tempo nem valida os nomes das personas.
 - Conferências automatizadas das mesmas 108 pessoas: 1.836 comparações concordantes,
-  dentro das tolerâncias. A revisão humana das fontes permanece pendente.
-- Nomes finais, eventual subdivisão dos Adormecidos e ações dependem da revisão do grupo.
+  dentro das tolerâncias. Revisão técnica delegada e conferências por recálculo concluídas; não são certificação humana independente.
+- Para a S5, John delegou a revisão e adota os quatro nomes de trabalho, sem subdivisão dos Adormecidos. Ações continuam hipóteses para teste.
 - A integração à priorização por valor deve usar a chave local do segmento; bases individuais
   e listas de contato permanecem fora do repositório público.
 - A classificação temática é por palavras-chave e foi reexecutada pelo mesmo código do rascunho; uma revisão
-  independente das regras continua pendente.
+  das categorias semânticas não é afirmada. Os percentuais são uma descrição do classificador, fora das conclusões executivas.
 - A próxima renovação não deve ser inferida apenas do aniversário de início da assinatura.
 - [Complemento às entregas dependentes](integracao_personas_s5.md): compatibilidade conferida,
   contribuição por persona, integração financeira e briefings condicionais de comunicação.

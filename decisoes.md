@@ -168,3 +168,9 @@ Autoria original de Claudinne; ajustes técnicos por Codex a pedido de John. Det
 |---|---|---|---|---|---|---|---|
 | 2026-11-07 | checagens S5 | Regra / Temporalidade | Atividade pré-pagamento e ausência de treino interpretadas como exclusão/erro | Preservar todos; sinal pré-pagamento é descritivo no freemium | Sem remoção automática; alertas apenas para investigação | 14.753 preservados; 759 sem treino; 395 sinais pré-pagamento; 58 alertas de volume/duração | Claudinne (original), John + Codex (revisão) |
 | 2026-11-07 | checagens S5 | Unicidade / Completude / Consistência | Conjuntos de IDs e comparações com nulos podiam esconder defeitos | Validar chave, cobertura, valores obrigatórios, domínios e colunas compartilhadas; falhar antes de salvar se regras violadas | Zero violações nas 14 regras e oito fórmulas nesta execução | 14.753 em cada base | John + Codex |
+
+### Consolidação S5 por delegação de John — 07/11/2026
+
+John autorizou revisar, aprovar tecnicamente e resolver as pendências da S5; posteriormente limitou a conclusão ao GitHub, sem submissão ao curso. A revisão está em `docs/entregas/revisao_final_s5.md`. Mantidos os quatro nomes como rótulos de trabalho, sem subdividir Adormecidos. Percentuais temáticos são resultados do classificador reproduzido, sem validação de motivação individual e fora das conclusões executivas. A decisão não representa assinatura autoral dos colegas.
+
+Corrigido o cenário de aniversário no revisor para planos anuais; acrescido modo de amostras por seeds; preservada a sequência da varredura de k para a estabilidade reproduzível. Nenhuma mudança em dados/brutos, nenhuma lista de CRM e nenhuma mensagem de retenção enviada. A aprovação formal dos PRs de John segue a regra externa de outro revisor; não foi contornada.

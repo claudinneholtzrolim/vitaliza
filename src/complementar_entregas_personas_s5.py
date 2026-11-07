@@ -42,7 +42,7 @@ def integrate(value, segments):
     result = value.copy()
     result["cluster"] = labels.segmento.to_numpy()
     result["persona"] = result.cluster.map(NAMES)
-    result["status_persona"] = "proposta de Kiril, revisão do grupo pendente"
+    result["status_persona"] = "rótulo de trabalho S5, revisão técnica delegada por John"
     # Integration must not replace any estimated effect or authorize intervention.
     return result
 

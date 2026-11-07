@@ -37,7 +37,6 @@ O [complemento das entregas](integracao_personas_s5.md) documenta a correspondê
 a integração econômica, as sínteses atualizadas e os briefings condicionais. A análise de entropia
 desse complemento está no próprio documento, distinguindo repetição necessária de ambiguidade.
 
-Classificador de motivações e conferidor original de Kiril não foram recebidos.
-As seeds originais de sorteio não foram reproduzidas. O calendário futuro de renovação
+Atualização da consolidação: classificador e conferidores originais recebidos no PR #9. Seeds 42/96 reproduzidas e regras temáticas documentadas. A semântica das motivações permanece exploratória. O calendário futuro de renovação
 e os efeitos das ações continuam em aberto. O PR de Leonardo e esta revisão precisam
 de avaliação do grupo; nomes e recomendações não foram aprovados automaticamente.

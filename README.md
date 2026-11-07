@@ -1,5 +1,7 @@
 # Vitaliza — Grupo 01
 
+**Semana 5:** [pacote coletivo, apresentação, relatório e cartões](docs/entregas/entrega_coletiva_s5.md).
+
 Business case do Módulo 2 do MBA em IA e Dados para Negócios (Inteli).
 
 A Vitaliza é um app brasileiro de treino (fictício) com modelo freemium: 64.948 contas cadastradas e 14.753 assinantes pagantes ativos em 30/09/2026, a data de corte. O churn mensal subiu de 5,6% em 2025 para 6,6% em 2026, e a empresa não sabe por quê.
@@ -133,3 +135,7 @@ Para reproduzir, depois da preparação de John: `.venv/bin/python src/clusteriz
 ## Checagens de Claudinne — Semana 5
 
 A entrega de Claudinne recebeu revisão técnica: regras e fórmulas das bases derivadas conferidas, com 14.753 pagantes preservados e alertas separados de erros comprovados. [Método, resultados e ajustes da revisão](docs/entregas/qualidade_claudinne_s5.md). Após a preparação de John: `.venv/bin/python src/checagens_qualidade_s5.py`. Flags individuais e resumo ficam em `dados/processados/s5_claudinne/`, fora do Git. A versão revisada permanece sujeita à revisão autoral e do grupo.
+
+## Pacote coletivo da Semana 5
+
+[Entrega coletiva e reprodução](docs/entregas/entrega_coletiva_s5.md): apresentação executiva de três slides, relatório de cinco páginas e quatro cartões de persona em `saidas/s5/`. Revisão técnica integrada por delegação de John, com autoria das frentes preservada. A reprodução completa usa `.venv/bin/python src/reproduzir_entrega_s5.py`. [Validação e limites](docs/entregas/revisao_final_s5.md). Preparado para o GitHub; não submetido à plataforma do curso.

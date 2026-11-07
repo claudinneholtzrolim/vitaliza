@@ -1,7 +1,7 @@
 """Revisão técnica das personas de Kiril; evidências individuais somente em dados/.
 
 Não implementa o conferidor original de Kiril: faz uma nova checagem independente
-das mesmas pessoas, extraídas dos PDFs locais, contra o pipeline de Leo reproduzido.
+das pessoas selecionadas por seeds ou PDFs locais, contra o pipeline de Leo reproduzido.
 """
 from __future__ import annotations
 
@@ -123,16 +123,17 @@ def load_leo():
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--pdf-12", type=Path, required=True)
-    ap.add_argument("--pdf-96", type=Path, required=True)
+    ap.add_argument("--pdf-12", type=Path)
+    ap.add_argument("--pdf-96", type=Path)
+    ap.add_argument("--amostras-seeds", action="store_true", help="Reproduzir amostras pelas seeds 42/96 sem PDFs")
     args = ap.parse_args()
     reference = subprocess.check_output(["git", "show", f"{BASE_SHA}:src/preparar_diagnostico_s5.py"], cwd=ROOT)
     assert reference == (ROOT / "src/preparar_diagnostico_s5.py").read_bytes(), "Preparação mudou: revisar a referência"
     prepared = json.loads((ROOT / "dados/processados/s5_john/manifesto_validacao.json").read_text())
     out = ROOT / "dados/saidas/s5_kiril_revisao"
     out.mkdir(parents=True, exist_ok=True)
-    samples = {12: sample_ids(args.pdf_12, 12), 96: sample_ids(args.pdf_96, 96)}
-    assert not set(samples[12]) & set(samples[96]), "Amostras se sobrepõem"
+    if not args.amostras_seeds and (args.pdf_12 is None or args.pdf_96 is None):
+        ap.error("Informe --amostras-seeds ou os dois PDFs de referência")
     paths = {p.stem: p for p in (ROOT / "dados/brutos").glob("*.csv")}
     paths["atividades"] = ROOT / "dados/brutos/atividades.parquet"
     hashes = {k: hashlib.sha256(p.read_bytes()).hexdigest() for k, p in paths.items()}
@@ -156,6 +157,15 @@ def main():
     sweep.to_csv(out / "varredura_reproduzida.csv", index=False)
     assert profile.assinantes.tolist() == [2783, 4315, 4793, 2862]
     assert len(detailed) == detailed.user_id.nunique() == 14753
+    if args.amostras_seeds:
+        from conferencia_comum_s5 import indexar_atividades, sortear_12, sortear_96
+        all_activities, rows_for = indexar_atividades(ROOT)
+        sample_context = detailed.merge(raw["usuarios"][["user_id", "data_cadastro", "relogio_conectado", "canal_aquisicao"]], on="user_id", validate="1:1")
+        first = sortear_12(sample_context, rows_for)
+        samples = {12: list(first), 96: list(sortear_96(sample_context, all_activities, set(first)))}
+    else:
+        samples = {12: sample_ids(args.pdf_12, 12), 96: sample_ids(args.pdf_96, 96)}
+    assert not set(samples[12]) & set(samples[96]), "Amostras se sobrepõem"
     checks = []
     tolerances = {"min_por_treino_90d": 1e-6, "proporcao_video_90d": 1e-6,
                   "taxa_dias_ativos_90d": 1e-6, "recencia_dias": .01,
@@ -209,7 +219,7 @@ def main():
     scenario = detailed.merge(raw["assinaturas"][["user_id", "inicio"]], on="user_id", validate="1:1")
     scenario["anniversary_2026"] = pd.to_datetime(scenario.inicio).map(lambda t: t.replace(year=2026) if (t.month, t.day) != (2, 29) else t.replace(year=2026, day=28))
     dormant_off = scenario[scenario.segmento.eq(0) & scenario.renovacao_desligada_retrato.eq(1)]
-    window = dormant_off[dormant_off.anniversary_2026.between("2026-10-01", "2026-11-29")]
+    window = dormant_off[dormant_off.plano.eq("anual") & dormant_off.anniversary_2026.between("2026-10-01", "2026-11-29")]
     off = detailed[detailed.renovacao_desligada_retrato.eq(1)]
     manifest = {
         "pipeline_base_sha": BASE_SHA,
@@ -217,8 +227,9 @@ def main():
         "sha256_segmentos": hashlib.sha256((out / "segmentos_reproduzidos.csv").read_bytes()).hexdigest(),
         "sha256_base_clusterizacao": hashlib.sha256((ROOT / "dados/processados/s5_john/base_clusterizacao.csv").read_bytes()).hexdigest(),
         "sha256_contexto": hashlib.sha256((ROOT / "dados/processados/s5_john/base_assinantes_corte.csv").read_bytes()).hexdigest(),
-        "sha256_pdf_12": hashlib.sha256(args.pdf_12.read_bytes()).hexdigest(),
-        "sha256_pdf_96": hashlib.sha256(args.pdf_96.read_bytes()).hexdigest(),
+        "sha256_pdf_12": hashlib.sha256(args.pdf_12.read_bytes()).hexdigest() if args.pdf_12 else None,
+        "sha256_pdf_96": hashlib.sha256(args.pdf_96.read_bytes()).hexdigest() if args.pdf_96 else None,
+        "origem_amostras": "seeds 42/96" if args.amostras_seeds else "PDFs",
         "versoes": {"pandas": pd.__version__, "numpy": np.__version__, "sklearn": __import__("sklearn").__version__},
         "comparacoes": {str(n): {"total": int((checks.amostra == n).sum()), "concordantes": int(checks.loc[checks.amostra.eq(n), "confere"].sum())} for n in samples},
         "recencia_ausente": int(f.recencia_dias.isna().sum()),

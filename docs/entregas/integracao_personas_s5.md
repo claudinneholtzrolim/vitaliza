@@ -20,7 +20,7 @@ se alguma deixar de ser sustentada pelos dados.
 
 Não houve alteração nos rótulos ou reatribuição de pessoas para fazer o perfil combinar com o nome.
 Mantidos 2.783 / 4.315 / 4.793 / 2.862 integrantes e a cobertura dos 14.753 pagantes.
-As motivações classificadas por Kiril continuam como resultados relatados, com regras completas pendentes.
+As regras completas de Kiril foram recebidas no PR #9 e os percentuais temáticos foram reproduzidos. São categorias por palavras-chave, sem validação independente de motivação individual.
 As hipóteses de ação continuam como propostas para teste, sem eficácia demonstrada.
 
 ## Quais entregas dependiam desse material

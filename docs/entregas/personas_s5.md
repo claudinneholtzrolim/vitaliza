@@ -64,6 +64,7 @@ O histórico disponível não confirma a próxima renovação dessas pessoas.
 
 **Medido:** mediana de 24 dias de treino em 90; 85,7% de vídeo na mediana e 41,5 minutos
 por treino. A proporção com renovação desligada é 7,6%; esse indicador não é uma previsão de churn.
+O nome de Kiril interpreta a predominância de vídeo; a base não confirma que o treino ocorreu em casa.
 
 **Hipótese de Kiril:** o vídeo pode apoiar uma rotina de bem-estar.
 
@@ -88,6 +89,8 @@ considerando efeito incremental e custo.
 relativa dos quatro grupos. Média de 0,2 seguidores; 26,7% vieram por influenciador,
 contra 14,2% a 15,1% nos demais. Tickets em 6,2%, contra 3,3% a 3,5% nos demais.
 A tendência de treino tem janela incompleta em 63,0% do grupo.
+O nome descreve a tendência central: 492 integrantes (17,2%) têm pelo menos 90 dias de assinatura.
+Não usar a persona como substituta da data individual de início ou da elegibilidade de onboarding.
 
 **Hipóteses de Kiril:** a rede pequena pode refletir uma fase inicial; uma aquisição associada
 a metas passageiras pode ter retenção diferente. Ambas precisam de avaliação longitudinal.
@@ -155,6 +158,8 @@ e usar características anteriores ao tratamento.
   e listas de contato permanecem fora do repositório público.
 - Kiril precisa disponibilizar o código da classificação temática para permitir sua reprodução.
 - A próxima renovação não deve ser inferida apenas do aniversário de início da assinatura.
+- [Complemento às entregas dependentes](integracao_personas_s5.md): compatibilidade conferida,
+  contribuição por persona, integração financeira e briefings condicionais de comunicação.
 
 ## Proveniência
 

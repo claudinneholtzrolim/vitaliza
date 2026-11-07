@@ -8,7 +8,8 @@ Kiril. Esta verificação editorial e automatizada não é aprovação humana do
 - Documentos autorais de origem: rascunho de personas e sumários de 12 e 96 registros.
 - Preparação regenerada e clusterização reproduzida no commit de Leonardo identificado no relatório.
 - As 1.836 comparações concordam dentro das tolerâncias; as duas amostras são distintas.
-- Vinte e um testes passaram: dez de preparação, seis da frente financeira e cinco da nova conferência.
+- Na revisão inicial, 21 testes passaram: dez de preparação, seis da frente financeira e cinco da nova conferência.
+- No complemento, sete testes de integração foram acrescentados; os 28 passaram. A cobertura um para um e a conciliação financeira também foram verificadas na execução completa.
 - Tabelas descrevem segmentos com 2.783 a 4.793 pessoas; a menor célula da campanha tem 264 destinatários.
 - Brutos preservados por hashes; PDFs e evidências individuais não integram os arquivos do PR.
 
@@ -31,6 +32,10 @@ Não foi atribuída uma nota estatística de qualidade a contagens de palavras.
 | Privacidade | Varredura dos arquivos selecionados para o PR, ausência de arquivos de dados e notebooks sem saída |
 
 ## Limitações restantes
+
+O [complemento das entregas](integracao_personas_s5.md) documenta a correspondência das personas,
+a integração econômica, as sínteses atualizadas e os briefings condicionais. A análise de entropia
+desse complemento está no próprio documento, distinguindo repetição necessária de ambiguidade.
 
 Classificador de motivações e conferidor original de Kiril não foram recebidos.
 As seeds originais de sorteio não foram reproduzidas. O calendário futuro de renovação

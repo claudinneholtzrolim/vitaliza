@@ -214,6 +214,9 @@ def main():
     manifest = {
         "pipeline_base_sha": BASE_SHA,
         "pipeline_leo_sha": LEO_SHA, "sha256_brutos": hashes,
+        "sha256_segmentos": hashlib.sha256((out / "segmentos_reproduzidos.csv").read_bytes()).hexdigest(),
+        "sha256_base_clusterizacao": hashlib.sha256((ROOT / "dados/processados/s5_john/base_clusterizacao.csv").read_bytes()).hexdigest(),
+        "sha256_contexto": hashlib.sha256((ROOT / "dados/processados/s5_john/base_assinantes_corte.csv").read_bytes()).hexdigest(),
         "sha256_pdf_12": hashlib.sha256(args.pdf_12.read_bytes()).hexdigest(),
         "sha256_pdf_96": hashlib.sha256(args.pdf_96.read_bytes()).hexdigest(),
         "versoes": {"pandas": pd.__version__, "numpy": np.__version__, "sklearn": __import__("sklearn").__version__},

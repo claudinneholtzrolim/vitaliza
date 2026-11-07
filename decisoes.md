@@ -45,7 +45,15 @@ proposto; não declaram aprovação autoral ou do grupo. Nenhum bruto foi altera
 | 2026-11-07 | campanha × segmentos | Temporalidade / Consistência | Selecionar sobreviventes e usar segmento posterior ao tratamento pode enviesar leitura causal | Publicar apenas cliques agregados com denominadores; efeito de retenção exige população sorteada original e controle | Segmentos do corte de setembro; campanha de 10/08 | 12 células agregadas de mensagens, controle fora do denominador de clique | Kiril (leitura); John + Codex (revisão) |
 | 2026-11-07 | textos e evidências da revisão | Regra | Dados individuais em repositório público; risco de atribuir validação automática a humano | Publicar documentação agregada e código; originais e comparações só em dados/; revisão humana permanece pendente | Sem identificadores, linhas individuais, texto livre ou PDF original no PR | Três PDFs de origem, 108 registros conferidos localmente | John + Codex |
 
-Detalhamento: [personas](docs/entregas/personas_s5.md) e
+### Complemento das entregas dependentes (07/11/2026)
+
+| Data | Arquivo | Dimensão | Problema | Decisão proposta / observação confirmada | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-07 | segmentos × base financeira | Consistência / Unicidade | Frente de valor ainda sem grupo/persona | Criar base integrada separada, sem sobrescrever a financeira; exigir chave única, cobertura exata, hashes compatíveis e conciliação individual da proxy e renovação | Mesmo corte e SHA de segmentação reproduzida; interromper se rótulo anterior conflitar | 14.753 pagantes; quatro personas; R$ 343.576,72 de contribuição equivalente/mês | Kiril (personas), Leonardo (segmentos), John + Codex (integração) |
+| 2026-11-07 | leitura das personas | Regra / Validade | Nome de grupo pode virar afirmação individual | Explicitar que vídeo não confirma localização em casa e Novatos não define elegibilidade de onboarding | Medianas dos grupos, sem reatribuir pessoas; conferir data individual para ação | 492 Novatos com assinatura de pelo menos 90 dias, 17,2% do grupo | Kiril (nomes); John + Codex (revisão) |
+| 2026-11-07 | sínteses e cenários | Temporalidade / Regra | Confundir grupo atual com churn histórico ou prioridade causal | Acrescentar contexto e valor por persona; manter efeito ausente, ação pendente e briefings condicionais | Segmento no corte não rotula quem já saiu; limiares H=1/3/6 são hipóteses | Quatro personas; 36 cenários econômicos sem oferta | John + Codex |
+
+Detalhamento: [integração](docs/entregas/integracao_personas_s5.md), [personas](docs/entregas/personas_s5.md) e
 [relatório técnico](docs/entregas/conferencia_personas_kiril_s5.md).
 
 ## Detalhes

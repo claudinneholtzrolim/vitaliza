@@ -32,8 +32,8 @@ Todo problema de qualidade ou regra de cálculo entra na tabela: uma linha por d
 
 ## Revisão das personas de Kiril (07/11/2026, proposta por PR)
 
-Autoria de personas e conferências originais: Kiril. Nova reprodução e revisão técnica:
-Codex, a pedido de John. Estas linhas registram o que foi verificado e o tratamento editorial
+Autoria de personas e conferências originais: Kiril + Claude. Nova reprodução e revisão técnica:
+John (apoio de Codex). Estas linhas registram o que foi verificado e o tratamento editorial
 proposto; não declaram aprovação autoral ou do grupo. Nenhum bruto foi alterado.
 
 | Data | Arquivo | Dimensão | Problema | Decisão proposta / observação confirmada | Critério | Linhas afetadas | Quem |
@@ -44,6 +44,8 @@ proposto; não declaram aprovação autoral ou do grupo. Nenhum bruto foi altera
 | 2026-11-07 | cenário de aniversários | Temporalidade / Regra | Aniversário não confirma próximo vencimento | Manter somente como cenário; corrigir soma para R$ 9.539,30 mensais equivalentes | Aniversário do início entre 01/10 e 29/11, segmento 0 e renovação desligada no retrato | 439 pessoas, agregadas | Kiril (cenário); John + Codex (conferência) |
 | 2026-11-07 | campanha × segmentos | Temporalidade / Consistência | Selecionar sobreviventes e usar segmento posterior ao tratamento pode enviesar leitura causal | Publicar apenas cliques agregados com denominadores; efeito de retenção exige população sorteada original e controle | Segmentos do corte de setembro; campanha de 10/08 | 12 células agregadas de mensagens, controle fora do denominador de clique | Kiril (leitura); John + Codex (revisão) |
 | 2026-11-07 | textos e evidências da revisão | Regra | Dados individuais em repositório público; risco de atribuir validação automática a humano | Publicar documentação agregada e código; originais e comparações só em dados/; revisão humana permanece pendente | Sem identificadores, linhas individuais, texto livre ou PDF original no PR | Três PDFs de origem, 108 registros conferidos localmente | John + Codex |
+| 2026-11-07 | `onboarding.csv` (`objetivo_texto`) | Completude / Consistência | Respostas em cerca de 35 frases-modelo, com variações de data, quilos e erros de digitação; ~30% nulas ou sem conteúdo por segmento | Classificar **um** tema principal por resposta (ordem: companhia/social, mente/bem-estar, saúde clínica, desempenho, estética/peso); denominador = respostas com conteúdo; "meta com data" como sinalizador à parte, que não soma com os temas; manter "não classificado" | Regras em `src/personas_regras_s5.py` (testadas em `tests/test_personas_s5.py`); não classificadas: 5,3% a 7,3% por segmento | 14.753 pagantes; 1.947 / 2.994 / 3.393 / 1.978 respostas com conteúdo | Kiril + Claude |
+| 2026-11-07 | `usuarios.csv` (`data_nascimento`) | Validade | Datas ausentes e idades fora de 14 a 90 anos | Não imputar as ausentes; **não** excluir as 133 idades fora de 14–90 anos da mediana (Rua e ritmo: 47,1; com o filtro do rascunho: 47,0) | Idade = dias até 01/10/2026 ÷ 365,25; cálculo em `src/levantar_personas_s5.py` | 764 ausentes; 133 fora de 14–90 anos | Kiril + Claude (rascunho); John (reprodução) |
 
 ### Complemento das entregas dependentes (07/11/2026)
 

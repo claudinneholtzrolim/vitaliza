@@ -1,16 +1,17 @@
 # Personas dos pagantes da Vitaliza — versão revisada
 
-**Autoria das personas, nomes provisórios, hipóteses e propostas de ação: Kiril — Grupo 01.**
-Revisão técnica e editorial preparada por Codex, a pedido de John Neto, em 07/11/2026.
+**Autoria das personas, nomes provisórios, hipóteses e propostas de ação: Kiril + Claude — Grupo 01.**
+Revisão técnica e reprodução das conferências: John Neto (apoio de Codex), em 07/11/2026.
 Clusterização de Leonardo; preparação da base e frente financeira de John.
-Esta revisão não representa aprovação de Kiril ou do grupo. Integração condicionada à revisão do PR.
+Esta versão aguarda a aprovação de Kiril e do grupo. Integração condicionada à revisão do PR.
 
 ## Escopo e evidência
 
 Retrato dos 14.753 pagantes ativos em 30/09/2026; limite exclusivo 01/10/2026, Brasília.
 Os quatro perfis abaixo descrevem comportamento observado. Nomes e interpretações são provisórios.
-As medidas das tabelas foram reproduzidas nas bases locais; a classificação temática das motivações
-permanece atribuída ao rascunho de Kiril, pois seu classificador e suas regras completas não estavam disponíveis.
+As medidas das tabelas foram reproduzidas nas bases locais. A classificação temática das motivações foi reexecutada
+a partir do código publicado em `src/personas_regras_s5.py` e `src/levantar_personas_s5.py`: é uma reexecução do
+código do próprio rascunho, não uma verificação independente.
 Método, versões, conferências e limites: [relatório da revisão](conferencia_personas_kiril_s5.md).
 
 ## Quatro personas
@@ -111,22 +112,34 @@ Não há efeito de retenção demonstrado para essas ações nesta entrega.
 
 Percentuais usam todos os integrantes de cada segmento; sexo ausente não é redistribuído.
 Idade = dias entre nascimento interpretável e limite de 01/10, divididos por 365,25;
-datas ausentes são excluídas da mediana. A reprodução encontrou 47,1 anos para Rua e ritmo,
-em vez de 47,0 no rascunho. O critério original de idade não foi disponibilizado.
+datas ausentes (764 pagantes) são excluídas da mediana. Idades fora de 14 a 90 anos (133 pessoas) **não** são excluídas.
+O rascunho as excluía e mostrava 47,0 para Rua e ritmo (47,04); sem o filtro dá 47,1 (47,11). Os demais segmentos não mudam.
 Sexo foi normalizado pelas grafias F/Fem/feminino e M/Masc/masculino; sistema por minúsculas.
 Essas características são descritivas: não se afirma igualdade estatística entre segmentos.
 
-**Leitura temática relatada por Kiril, ainda não reproduzida:**
+As diferenças de cadastro são pequenas: idade mediana entre 46,4 e 47,5 anos e mulheres entre 49,1% e 50,9%.
+A exceção é a aquisição por influenciador nos Novatos (26,7%, contra 14,2% a 15,1% nos demais).
+Por isso as personas se distinguem pelo comportamento de uso e pela motivação declarada, não por perfil demográfico.
 
-| Persona | Leitura do rascunho | Situação nesta revisão |
-|---|---|---|
-| Adormecidos | Desempenho 31,5%; meta com data 27,5% | Classificador, denominadores e regra de sobreposição pendentes |
-| Rotina em casa | Mente/bem-estar 25,0%; saúde clínica 27,0%; desempenho 7,7% | Mesma pendência |
-| Rua e ritmo | Desempenho 26,4%; saúde clínica 26,1% | Mesma pendência |
-| Novatos | Estética/peso 21,7%; meta com data 27,0% | Mesma pendência |
+**Leitura temática do objetivo declarado no cadastro** (código em `src/personas_regras_s5.py` e `src/levantar_personas_s5.py`):
 
-Esses percentuais preservam o trabalho autoral, mas não recebem o status de medida reproduzida.
-O cadastro pode ser antigo e seu texto não comprova a motivação atual.
+| Persona | Respostas com conteúdo (denominador) | Leitura de destaque | Não classificadas |
+|---|---:|---|---:|
+| Adormecidos | 1.947 | Desempenho 31,5%; meta com data 27,5% | 7,3% |
+| Rotina em casa | 2.994 | Mente/bem-estar 25,0%; saúde clínica 27,0%; desempenho 7,7% | 7,1% |
+| Rua e ritmo | 3.393 | Desempenho 26,4%; saúde clínica 26,1% | 5,3% |
+| Novatos | 1.978 | Estética/peso 21,7%; meta com data 27,0% | 7,2% |
+
+Regras de leitura:
+
+- Cada resposta recebe **um** tema principal, o primeiro que casar na ordem companhia/social, mente/bem-estar,
+  saúde clínica, desempenho, estética/peso. Os percentuais de tema somam 100% entre as respostas com conteúdo
+  (incluindo as não classificadas, em geral por erro de digitação).
+- O denominador exclui respostas nulas e sem conteúdo (de 29% a 31% de cada segmento).
+- **Meta com data** (verão, casamento, formatura, viagem, prova) é um sinalizador à parte: pode coexistir com
+  qualquer tema e por isso não soma com os percentuais de tema.
+- A classificação é por palavras-chave sobre cerca de 35 frases-modelo do cadastro e deve ser revista pelo grupo.
+  O cadastro pode ser antigo e seu texto não comprova a motivação atual.
 
 ## Campanha de agosto: descrição de cliques
 
@@ -156,7 +169,8 @@ e usar características anteriores ao tratamento.
 - Nomes finais, eventual subdivisão dos Adormecidos e ações dependem da revisão do grupo.
 - A integração à priorização por valor deve usar a chave local do segmento; bases individuais
   e listas de contato permanecem fora do repositório público.
-- Kiril precisa disponibilizar o código da classificação temática para permitir sua reprodução.
+- A classificação temática é por palavras-chave e foi reexecutada pelo mesmo código do rascunho; uma revisão
+  independente das regras continua pendente.
 - A próxima renovação não deve ser inferida apenas do aniversário de início da assinatura.
 - [Complemento às entregas dependentes](integracao_personas_s5.md): compatibilidade conferida,
   contribuição por persona, integração financeira e briefings condicionais de comunicação.
@@ -167,3 +181,7 @@ Origem autoral: `Personas Vitaliza – rascunho.pdf`, enviado por John, com reun
 07/11/2026. Os dois sumários de conferência de Kiril estão referenciados no relatório técnico.
 Os PDFs originais foram preservados localmente; esta versão pública contém apenas agregados,
 interpretações atribuídas e pendências. Nenhum identificador ou texto individual foi incorporado.
+
+Código de reprodução das tabelas de cadastro, motivações e campanha, e do cenário de aniversários:
+`src/levantar_personas_s5.py`, `src/calcular_risco_janela_s5.py` e `src/personas_regras_s5.py`
+(testes em `tests/test_personas_s5.py`).

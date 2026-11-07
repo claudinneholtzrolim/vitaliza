@@ -99,6 +99,12 @@ acrescenta o contexto às sínteses financeira e diagnóstica. Os resultados det
 `dados/saidas/s5_integracao_personas/`; sete novos testes verificam a integração, totalizando 28.
 Briefings de mensagem são rascunhos condicionais, sem decisão de contato ou envio.
 
+## Clusterização de Leonardo — Semana 5
+
+Os 14.753 pagantes no corte se dividem em quatro segmentos de comportamento: Distantes (18,9%), Engajados em casa (29,2%), Engajados ao ar livre (32,5%) e Recém-chegados (19,4%). Os nomes são provisórios; as personas são da frente de Kiril. Um dado que não entrou no agrupamento valida o resultado: 57,5% dos Distantes já desligaram a renovação, contra 3% a 8% nos demais segmentos. [Método, tabela comparativa e limitações](docs/entregas/clusterizacao_s5.md); roteiro de estudo em [`notebooks/08_clusterizacao.ipynb`](notebooks/08_clusterizacao.ipynb).
+
+Para reproduzir, depois da preparação de John: `.venv/bin/python src/clusterizacao_s5.py --k 4`. A atribuição `user_id` → segmento fica em `dados/processados/s5_leo/segmentos.csv`, fora do Git.
+
 ## Como montar os dados
 
 `dados/` não é versionado. Depois de clonar:

@@ -82,6 +82,16 @@ Reprodução, após a preparação da base: `.venv/bin/python src/valor_prioriza
 
 Bases individuais, relatórios, auditoria e tabelas permanecem em `dados/`, ignorado no Git, conforme a revisão do grupo no PR #4. O GitHub concentra código, decisões, instruções e o registro da transferência de responsabilidade. Os cenários distinguem contribuição equivalente da carteira de valor incremental de uma intervenção. Clusters, efeito das ações e priorização individual continuam como dependências para consolidar a decisão de retenção.
 
+## Personas de Kiril — revisão para o grupo
+
+[Personas revisadas](docs/entregas/personas_s5.md), com autoria de Kiril preservada,
+e [conferência técnica](docs/entregas/conferencia_personas_kiril_s5.md), preparada a pedido de John.
+As 1.836 comparações das mesmas 108 pessoas foram reproduzidas dentro das tolerâncias;
+as hipóteses de ação e a classificação temática continuam sujeitas à revisão do grupo.
+A reprodução fixa o commit de clusterização de Leonardo do PR #5, ainda em revisão.
+Código e instruções públicos; PDFs originais, identificadores e evidências individuais permanecem em `dados/`, fora do Git.
+[Revisão de qualidade e entropia editorial](docs/entregas/revisao_qualidade_personas_kiril_s5.md).
+
 ## Como montar os dados
 
 `dados/` não é versionado. Depois de clonar:

@@ -30,6 +30,24 @@ Todo problema de qualidade ou regra de cálculo entra na tabela: uma linha por d
 
 ---
 
+## Revisão das personas de Kiril (07/11/2026, proposta por PR)
+
+Autoria de personas e conferências originais: Kiril. Nova reprodução e revisão técnica:
+Codex, a pedido de John. Estas linhas registram o que foi verificado e o tratamento editorial
+proposto; não declaram aprovação autoral ou do grupo. Nenhum bruto foi alterado.
+
+| Data | Arquivo | Dimensão | Problema | Decisão proposta / observação confirmada | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-07 | sumários de conferência | Regra | Limites de erro populacional sem inferência compatível com a seleção | Remover 25%/3% e declarar concordância apenas nos casos examinados | Mesmas amostras dos PDFs; não tratar métricas por pessoa como observações independentes | 108 pessoas, 1.836 comparações | Kiril (originais); John + Codex (revisão) |
+| 2026-11-07 | arquivo descritivo × matriz de Leonardo | Completude / Temporalidade | Diferença de representação pode parecer erro | Documentar: tendência original no arquivo e zero na matriz com exposição <60 dias; recência ausente no arquivo e 273 na matriz sem treino em 2026 | Função preparar no SHA eafaf08; representação confirmada, sem modificar a escolha de Leonardo | 1.938 tendências; 177 recências | Leonardo (método); John + Codex (conferência) |
+| 2026-11-07 | cadastro descritivo das personas | Consistência | Sexo em seis grafias e sistema em cinco | Normalizar F/Fem/feminino e M/Masc/masculino; sistema em minúsculas; não imputar ausências | Percentuais sobre todos os membros do segmento; idade em dias /365,25 até 01/10 | 14.753 pagantes; idade de Rua e ritmo reproduzida como 47,1 | Kiril (rascunho); John + Codex (reprodução) |
+| 2026-11-07 | cenário de aniversários | Temporalidade / Regra | Aniversário não confirma próximo vencimento | Manter somente como cenário; corrigir soma para R$ 9.539,30 mensais equivalentes | Aniversário do início entre 01/10 e 29/11, segmento 0 e renovação desligada no retrato | 439 pessoas, agregadas | Kiril (cenário); John + Codex (conferência) |
+| 2026-11-07 | campanha × segmentos | Temporalidade / Consistência | Selecionar sobreviventes e usar segmento posterior ao tratamento pode enviesar leitura causal | Publicar apenas cliques agregados com denominadores; efeito de retenção exige população sorteada original e controle | Segmentos do corte de setembro; campanha de 10/08 | 12 células agregadas de mensagens, controle fora do denominador de clique | Kiril (leitura); John + Codex (revisão) |
+| 2026-11-07 | textos e evidências da revisão | Regra | Dados individuais em repositório público; risco de atribuir validação automática a humano | Publicar documentação agregada e código; originais e comparações só em dados/; revisão humana permanece pendente | Sem identificadores, linhas individuais, texto livre ou PDF original no PR | Três PDFs de origem, 108 registros conferidos localmente | John + Codex |
+
+Detalhamento: [personas](docs/entregas/personas_s5.md) e
+[relatório técnico](docs/entregas/conferencia_personas_kiril_s5.md).
+
 ## Detalhes
 
 ### Valor e priorização assumidos por John (03/11/2026)

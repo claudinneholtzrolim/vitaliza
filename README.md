@@ -106,3 +106,7 @@ Bases individuais, relatórios, auditoria e tabelas permanecem em `dados/`, igno
 | `feed_posts.csv` | Texto | post | 119.309 |
 | `tickets_suporte.csv` | Texto | chamado | 4.422 |
 | `heatmaps_90d/` | Imagem | assinante e data | 12.426 + 13.047 |
+
+## Checagens de Claudinne — Semana 5
+
+A entrega de Claudinne recebeu revisão técnica: regras e fórmulas das bases derivadas conferidas, com 14.753 pagantes preservados e alertas separados de erros comprovados. [Método, resultados e ajustes da revisão](docs/entregas/qualidade_claudinne_s5.md). Após a preparação de John: `.venv/bin/python src/checagens_qualidade_s5.py`. Flags individuais e resumo ficam em `dados/processados/s5_claudinne/`, fora do Git. A versão revisada permanece sujeita à revisão autoral e do grupo.

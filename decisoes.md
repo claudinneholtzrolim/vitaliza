@@ -120,3 +120,12 @@ Código: `notebooks/05_temporalidade_uso_mensal.ipynb`. O dicionário não avisa
 **Risco para o modelo (objetivo 4):** com separação no tempo, variáveis de inatividade calculadas sobre o arquivo como está fariam o modelo aprender a mudança de registro entre os anos, não o comportamento.
 
 **Pendente:** definir o universo de cada mês (quem deveria ter linha) com `assinaturas.csv`/`eventos_assinatura.csv` para completar 2025 com zeros; conferir `minutos` contra `duracao_min` de `atividades.parquet` em 2026.
+
+### Revisão das checagens de Claudinne — 07/11/2026
+
+Autoria original de Claudinne; ajustes técnicos por Codex a pedido de John. Detalhes em `docs/entregas/qualidade_claudinne_s5.md`.
+
+| Data | Arquivo | Dimensão | Problema | Decisão | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-07 | checagens S5 | Regra / Temporalidade | Atividade pré-pagamento e ausência de treino interpretadas como exclusão/erro | Preservar todos; sinal pré-pagamento é descritivo no freemium | Sem remoção automática; alertas apenas para investigação | 14.753 preservados; 759 sem treino; 395 sinais pré-pagamento; 58 alertas de volume/duração | Claudinne (original), John + Codex (revisão) |
+| 2026-11-07 | checagens S5 | Unicidade / Completude / Consistência | Conjuntos de IDs e comparações com nulos podiam esconder defeitos | Validar chave, cobertura, valores obrigatórios, domínios e colunas compartilhadas; falhar antes de salvar se regras violadas | Zero violações nas 14 regras e oito fórmulas nesta execução | 14.753 em cada base | John + Codex |

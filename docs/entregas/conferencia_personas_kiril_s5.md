@@ -1,7 +1,7 @@
 # Conferência das personas de Kiril — revisão técnica
 
-**Trabalho original de personas e das duas conferências: Kiril — Grupo 01.**
-Nova reprodução e revisão: Codex, a pedido de John Neto, em 07/11/2026.
+**Trabalho original de personas e das duas conferências: Kiril + Claude — Grupo 01.**
+Nova reprodução e revisão: John Neto (apoio de Codex), em 07/11/2026.
 Este relatório reúne as duas conferências em uma versão pública sem dados individuais;
 não substitui a aprovação de Kiril e do grupo.
 
@@ -11,7 +11,8 @@ O novo recálculo, independente das funções de preparação, apresentou concor
 dos 108 registros distintos identificados nos PDFs de Kiril, dentro das tolerâncias declaradas.
 O pipeline de Leonardo também foi reproduzido, gerando os quatro grupos com os mesmos tamanhos.
 O resultado fornece evidência de consistência nos casos examinados; não certifica toda a base
-ou a interpretação das personas. O conferidor original de Kiril não foi disponibilizado.
+ou a interpretação das personas. Os conferidores de Kiril estão publicados em `src/conferir_12_registros_s5.py`
+e `src/conferir_96_registros_s5.py`, com o recálculo em `src/conferencia_comum_s5.py`.
 
 | Conferência | Pessoas por segmento | Pessoas | Comparações | Concordantes |
 |---|---:|---:|---:|---:|
@@ -21,8 +22,10 @@ ou a interpretação das personas. O conferidor original de Kiril não foi dispo
 
 As listas foram extraídas dos próprios PDFs e confrontadas com a população reproduzida.
 Foram verificados unicidade, ausência de sobreposição e quantidade por segmento.
-As seeds 42 e 96 e os papéis de seleção A/B/C são descritos por Kiril; o sorteio e a atribuição
-desses papéis não foram reproduzidos, porque o código original não foi fornecido.
+As seeds 42 e 96 e os papéis de seleção A/B/C são descritos por Kiril. Os conferidores publicados em `src/`
+reproduzem os sorteios: reexecutados sobre `segmentos.csv`, selecionaram exatamente os mesmos 12 e 96 registros
+(mesmos `user_id` e mesmos papéis) e deram 96/96 registros com 17/17 métricas. O sorteio é por quotas e depende da
+ordem das linhas de `segmentos.csv`, da ordem das chamadas ao gerador aleatório e da versão do pandas.
 
 ## Correção da conclusão estatística
 
@@ -151,9 +154,11 @@ da revisão do PR #5; esta entrega não incorpora nem aprova esse PR automaticam
   É uma checagem de calendário, sujeita a horário de recebimento e histórico, não uma previsão.
   Não confirma a próxima renovação de 439 pessoas; falta uma regra validada de próximo vencimento.
 - Cadastro e cliques foram recalculados; a tabela pública usa contagens agregadas e denominadores.
-  No rascunho, a idade mediana de Rua e ritmo era 47,0; a fórmula explicitada nesta revisão dá 47,1.
-- Motivações e metas por palavras-chave: percentuais preservados como relato de Kiril;
-  classificador, denominadores e tratamento de frases com vários temas não foram fornecidos.
+  No rascunho, a idade mediana de Rua e ritmo era 47,0 porque ele excluía idades fora de 14 a 90 anos (133 pessoas);
+  sem esse filtro, como nesta revisão e em `src/levantar_personas_s5.py`, é 47,1.
+- Motivações e metas por palavras-chave: classificador e regras publicados em `src/personas_regras_s5.py`
+  (um tema principal por resposta, denominador = respostas com conteúdo, meta com data como sinalizador à parte).
+  Os percentuais reexecutados coincidem com o rascunho. É o código do próprio rascunho, não uma verificação independente.
 - Amostra maior cobre mais casos, mas não elimina erro compartilhado de regra: o recálculo
   independente continua usando as definições documentadas pelo mesmo grupo.
 
@@ -194,8 +199,18 @@ git fetch https://github.com/leonardomoraesmendes/vitaliza.git leo/clusterizacao
 ```
 
 O script recupera o código de Leonardo pelo SHA, sem copiá-lo para o PR e sem rodar seu `main`.
-Se a preparação mudar, a referência deve ser revisada antes da execução. Os PDFs são necessários
-apenas para recuperar as mesmas amostras; não estão disponíveis no repositório público.
+Se a preparação mudar, a referência deve ser revisada antes da execução. Este script ainda lê os `user_id` dos PDFs;
+os conferidores de `src/` sorteiam as mesmas amostras por seed e não dependem dos PDFs, que não estão no repositório público.
+
+Levantamento descritivo, cenário de aniversários e conferências por seed (só pandas e pyarrow; gravam em `dados/saidas/s5_kiril/`):
+
+```sh
+.venv/bin/python src/levantar_personas_s5.py
+.venv/bin/python src/calcular_risco_janela_s5.py
+.venv/bin/python src/conferir_12_registros_s5.py
+.venv/bin/python src/conferir_96_registros_s5.py
+```
+
 Todos os resultados detalhados, inclusive comparações individuais, ficam em
 `dados/saidas/s5_kiril_revisao/`, ignorado no Git. O manifesto local contém hashes das fontes,
 versões e resultados. Nenhum envio de base ou PDF original faz parte da reprodução.

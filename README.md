@@ -80,7 +80,24 @@ Em 03/11/2026, John informou a saída de Marcela do curso e assumiu sua entrega.
 
 Reprodução, após a preparação da base: `.venv/bin/python src/valor_priorizacao_s5.py`. Leitura: `dados/saidas/s5_valor_priorizacao/John_Valor_Priorizacao_S5.md`; integração ao texto coletivo: `sintese_para_relatorio.md` na mesma pasta. PDF opcional no macOS: `swift src/exportar_valor_s5.swift`.
 
-Bases individuais, relatórios, auditoria e tabelas permanecem em `dados/`, ignorado no Git, conforme a revisão do grupo no PR #4. O GitHub concentra código, decisões, instruções e o registro da transferência de responsabilidade. Os cenários distinguem contribuição equivalente da carteira de valor incremental de uma intervenção. Clusters, efeito das ações e priorização individual continuam como dependências para consolidar a decisão de retenção.
+Bases individuais, relatórios, auditoria e tabelas permanecem em `dados/`, ignorado no Git, conforme a revisão do grupo no PR #4. O GitHub concentra código, decisões, instruções e o registro da transferência de responsabilidade. Os cenários distinguem contribuição equivalente da carteira de valor incremental de uma intervenção. A integração descritiva dos segmentos e personas está disponível no complemento abaixo; efeito das ações, elegibilidade e priorização individual permanecem necessários para consolidar a decisão de retenção.
+
+## Personas de Kiril — revisão para o grupo
+
+[Personas revisadas](docs/entregas/personas_s5.md), com autoria de Kiril preservada,
+e [conferência técnica](docs/entregas/conferencia_personas_kiril_s5.md), preparada a pedido de John.
+As 1.836 comparações das mesmas 108 pessoas foram reproduzidas dentro das tolerâncias;
+as hipóteses de ação e a classificação temática continuam sujeitas à revisão do grupo.
+A reprodução fixa o commit de clusterização de Leonardo do PR #5, ainda em revisão.
+Código e instruções públicos; PDFs originais, identificadores e evidências individuais permanecem em `dados/`, fora do Git.
+[Revisão de qualidade e entropia editorial](docs/entregas/revisao_qualidade_personas_kiril_s5.md).
+
+**Complemento de 07/11:** [compatibilidade e entregas dependentes](docs/entregas/integracao_personas_s5.md).
+Após executar a revisão e a frente financeira, `.venv/bin/python src/complementar_entregas_personas_s5.py`
+liga os 14.753 pagantes às personas em uma base separada, concilia a contribuição econômica e
+acrescenta o contexto às sínteses financeira e diagnóstica. Os resultados detalhados ficam em
+`dados/saidas/s5_integracao_personas/`; sete novos testes verificam a integração, totalizando 28.
+Briefings de mensagem são rascunhos condicionais, sem decisão de contato ou envio.
 
 ## Como montar os dados
 

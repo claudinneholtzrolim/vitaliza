@@ -30,6 +30,34 @@ Todo problema de qualidade ou regra de cálculo entra na tabela: uma linha por d
 
 ---
 
+## Revisão das personas de Kiril (07/11/2026, proposta por PR)
+
+Autoria de personas e conferências originais: Kiril + Claude. Nova reprodução e revisão técnica:
+John (apoio de Codex). Estas linhas registram o que foi verificado e o tratamento editorial
+proposto; não declaram aprovação autoral ou do grupo. Nenhum bruto foi alterado.
+
+| Data | Arquivo | Dimensão | Problema | Decisão proposta / observação confirmada | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-07 | sumários de conferência | Regra | Limites de erro populacional sem inferência compatível com a seleção | Remover 25%/3% e declarar concordância apenas nos casos examinados | Mesmas amostras dos PDFs; não tratar métricas por pessoa como observações independentes | 108 pessoas, 1.836 comparações | Kiril (originais); John + Codex (revisão) |
+| 2026-11-07 | arquivo descritivo × matriz de Leonardo | Completude / Temporalidade | Diferença de representação pode parecer erro | Documentar: tendência original no arquivo e zero na matriz com exposição <60 dias; recência ausente no arquivo e 273 na matriz sem treino em 2026 | Função preparar no SHA eafaf08; representação confirmada, sem modificar a escolha de Leonardo | 1.938 tendências; 177 recências | Leonardo (método); John + Codex (conferência) |
+| 2026-11-07 | cadastro descritivo das personas | Consistência | Sexo em seis grafias e sistema em cinco | Normalizar F/Fem/feminino e M/Masc/masculino; sistema em minúsculas; não imputar ausências | Percentuais sobre todos os membros do segmento; idade em dias /365,25 até 01/10 | 14.753 pagantes; idade de Rua e ritmo reproduzida como 47,1 | Kiril (rascunho); John + Codex (reprodução) |
+| 2026-11-07 | cenário de aniversários | Temporalidade / Regra | Aniversário não confirma próximo vencimento | Manter somente como cenário; corrigir soma para R$ 9.539,30 mensais equivalentes | Aniversário do início entre 01/10 e 29/11, segmento 0 e renovação desligada no retrato | 439 pessoas, agregadas | Kiril (cenário); John + Codex (conferência) |
+| 2026-11-07 | campanha × segmentos | Temporalidade / Consistência | Selecionar sobreviventes e usar segmento posterior ao tratamento pode enviesar leitura causal | Publicar apenas cliques agregados com denominadores; efeito de retenção exige população sorteada original e controle | Segmentos do corte de setembro; campanha de 10/08 | 12 células agregadas de mensagens, controle fora do denominador de clique | Kiril (leitura); John + Codex (revisão) |
+| 2026-11-07 | textos e evidências da revisão | Regra | Dados individuais em repositório público; risco de atribuir validação automática a humano | Publicar documentação agregada e código; originais e comparações só em dados/; revisão humana permanece pendente | Sem identificadores, linhas individuais, texto livre ou PDF original no PR | Três PDFs de origem, 108 registros conferidos localmente | John + Codex |
+| 2026-11-07 | `onboarding.csv` (`objetivo_texto`) | Completude / Consistência | Respostas em cerca de 35 frases-modelo, com variações de data, quilos e erros de digitação; ~30% nulas ou sem conteúdo por segmento | Classificar **um** tema principal por resposta (ordem: companhia/social, mente/bem-estar, saúde clínica, desempenho, estética/peso); denominador = respostas com conteúdo; "meta com data" como sinalizador à parte, que não soma com os temas; manter "não classificado" | Regras em `src/personas_regras_s5.py` (testadas em `tests/test_personas_s5.py`); não classificadas: 5,3% a 7,3% por segmento | 14.753 pagantes; 1.947 / 2.994 / 3.393 / 1.978 respostas com conteúdo | Kiril + Claude |
+| 2026-11-07 | `usuarios.csv` (`data_nascimento`) | Validade | Datas ausentes e idades fora de 14 a 90 anos | Não imputar as ausentes; **não** excluir as 133 idades fora de 14–90 anos da mediana (Rua e ritmo: 47,1; com o filtro do rascunho: 47,0) | Idade = dias até 01/10/2026 ÷ 365,25; cálculo em `src/levantar_personas_s5.py` | 764 ausentes; 133 fora de 14–90 anos | Kiril + Claude (rascunho); John (reprodução) |
+
+### Complemento das entregas dependentes (07/11/2026)
+
+| Data | Arquivo | Dimensão | Problema | Decisão proposta / observação confirmada | Critério | Linhas afetadas | Quem |
+|---|---|---|---|---|---|---|---|
+| 2026-11-07 | segmentos × base financeira | Consistência / Unicidade | Frente de valor ainda sem grupo/persona | Criar base integrada separada, sem sobrescrever a financeira; exigir chave única, cobertura exata, hashes compatíveis e conciliação individual da proxy e renovação | Mesmo corte e SHA de segmentação reproduzida; interromper se rótulo anterior conflitar | 14.753 pagantes; quatro personas; R$ 343.576,72 de contribuição equivalente/mês | Kiril (personas), Leonardo (segmentos), John + Codex (integração) |
+| 2026-11-07 | leitura das personas | Regra / Validade | Nome de grupo pode virar afirmação individual | Explicitar que vídeo não confirma localização em casa e Novatos não define elegibilidade de onboarding | Medianas dos grupos, sem reatribuir pessoas; conferir data individual para ação | 492 Novatos com assinatura de pelo menos 90 dias, 17,2% do grupo | Kiril (nomes); John + Codex (revisão) |
+| 2026-11-07 | sínteses e cenários | Temporalidade / Regra | Confundir grupo atual com churn histórico ou prioridade causal | Acrescentar contexto e valor por persona; manter efeito ausente, ação pendente e briefings condicionais | Segmento no corte não rotula quem já saiu; limiares H=1/3/6 são hipóteses | Quatro personas; 36 cenários econômicos sem oferta | John + Codex |
+
+Detalhamento: [integração](docs/entregas/integracao_personas_s5.md), [personas](docs/entregas/personas_s5.md) e
+[relatório técnico](docs/entregas/conferencia_personas_kiril_s5.md).
+
 ## Detalhes
 
 ### Valor e priorização assumidos por John (03/11/2026)

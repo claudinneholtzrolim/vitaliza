@@ -37,7 +37,7 @@ A receita somada dos quatro segmentos (R$ 405,5 mil) bate com o valor após taxa
 - **Engajados ao ar livre:** frequência alta, treinos majoritariamente ao ar livre (corrida, caminhada, pedal), sessões mais longas e o maior tempo de casa.
 - **Recém-chegados:** mediana de 38 dias de assinatura, a maior frequência relativa da base, ainda sem rede social no app (0,2 seguidores em média), e o dobro de tickets dos demais.
 
-**Validação externa.** A renovação desligada não entrou no agrupamento, que usou só comportamento de uso. Mesmo assim, ela se concentra num segmento: 57,5% nos Distantes, contra 3% a 8% nos demais. É a evidência mais forte de que os grupos capturam algo real, e o dado mais relevante para a priorização: R$ 63,3 mil mensais equivalentes, com mais da metade já sinalizando saída.
+**Conferência descritiva com variável fora do agrupamento.** A renovação desligada não entrou no agrupamento, que usou só comportamento de uso. Mesmo assim, ela se concentra num segmento: 57,5% nos Distantes, contra 3% a 8% nos demais. Essa associação ajuda a interpretar o perfil. O segmento soma R$ 63,3 mil mensais equivalentes, sem afirmar perda futura desse valor nem retorno de contato.
 
 ## Método
 

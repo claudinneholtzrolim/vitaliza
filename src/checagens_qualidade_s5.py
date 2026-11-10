@@ -8,9 +8,15 @@ Uso, na raiz do repositório:
 Entradas:  dados/processados/s5_john/base_clusterizacao.csv
            dados/processados/s5_john/base_assinantes_corte.csv
 Saída:     dados/processados/s5_claudinne/qualidade_flags.csv (uma linha por assinante, fora do Git)
-           e o resumo das cinco dimensões impresso na tela.
+           resumo agregado impresso na tela e salvo em resumo_qualidade.json.
+
+Autoria original: Claudinne — Grupo 01.
+Revisão técnica: Codex a pedido de John, 07/11/2026.
+Não remove assinantes nem substitui a auditoria dos arquivos brutos.
 """
 from pathlib import Path
+import hashlib
+import json
 
 import numpy as np
 import pandas as pd
@@ -35,7 +41,7 @@ def marcar(df):
     f["sem_treino_2026"] = df.sem_treino_observado_2026
     f["onboarding_nivel_vazio"] = df.nivel.isna().astype(int)
     f["onboarding_dias_planejados_vazio"] = df.dias_planejados_semana.isna().astype(int)
-    f["atividade_antes_do_inicio"] = (
+    f["sinal_atividade_anterior_assinatura_paga"] = (
         (t < 90) & ((df.dias_ativos_90d > t + 1)
                     | (df.dias_desde_ultimo_treino_2026 > t + 1)
                     | ((t < 30) & (df.treinos_90d > df.treinos_30d)))
@@ -44,7 +50,8 @@ def marcar(df):
     f["volume_extremo_40treinos_30d"] = (df.treinos_30d >= 40).astype(int)
     f["minutos_30d_acima_p99"] = (df.minutos_30d > df.minutos_30d.quantile(0.99)).astype(int)
     f["minutos_90d_acima_p99"] = (df.minutos_90d > df.minutos_90d.quantile(0.99)).astype(int)
-    f["revisar"] = f[["atividade_antes_do_inicio", "treino_longo_300min",
+    # Treino anterior ao pagamento é permitido no freemium; não é erro.
+    f["revisar"] = f[["treino_longo_300min",
                       "volume_extremo_40treinos_30d"]].max(axis=1)
     return f
 
@@ -75,25 +82,25 @@ def recalculos_base(b):
     taxa_esperada = b.canal_cobranca.map({"app_store": 0.15, "google_play": 0.15,
                                           "web_cartao": 0.035, "web_pix": 0.0099})
     s = b.sistema.str.lower()
-    gap = b.tempo_cadastro_dias - b.tempo_assinatura_dias
     return {
         "variacao = treinos_30d - anteriores": (b.variacao_treinos_tratados_30d != b.treinos_30d - b.treinos_30d_anteriores).sum(),
         "vídeo + ar livre = treinos (30d e 90d)": ((b.treinos_video_30d + b.treinos_ar_livre_30d != b.treinos_30d)
                                                     | (b.treinos_video_90d + b.treinos_ar_livre_90d != b.treinos_90d)).sum(),
         "proporcao_video = vídeo / treinos (90d)": ((b.proporcao_video_90d - b.treinos_video_90d / b.treinos_90d.replace(0, np.nan)).abs() > 1e-9).sum(),
         "conciliação = BI set - treinos_30d": (b.atividades_bi_set - b.treinos_30d != b.bi_treinos_set_menos_detalhe).sum(),
-        "receita mensal = 39,90; anual = cobrança / 12": (((b.plano == "mensal") & (b.receita_mensal_equivalente_proxy.round(2) != 39.90))
-                                                          | ((b.plano == "anual") & ((b.receita_mensal_equivalente_proxy - b.ultima_cobranca_aprovada_reais / 12).abs() > 0.01))).sum(),
+        "proxy mensal = última cobrança / divisor do plano": (
+            (b.receita_mensal_equivalente_proxy - b.ultima_cobranca_aprovada_reais
+             / b.plano.map({"mensal": 1, "anual": 12})).abs() > 1e-9).sum(),
         "taxa implícita = taxa do canal (enunciado)": ((taxa - taxa_esperada).abs() > 1e-4).sum(),
         "App Store só em iOS; Google Play só em Android": (((b.canal_cobranca == "app_store") & (s != "ios"))
                                                          | ((b.canal_cobranca == "google_play") & (s != "android"))).sum(),
         "renovacao_divergente vazia = estado ausente nos eventos": (b.renovacao_divergente.isna() != b.renovacao_desligada_eventos.isna()).sum(),
-        "cadastro fora de 6 a 7 dias antes do início pago": (~gap.between(6, 7)).sum(),
     }
 
 
 def achados_novos(b):
     return {
+        "cadastro fora de 6 a 7 dias antes do início pago (descritivo)": (~(b.tempo_cadastro_dias - b.tempo_assinatura_dias).between(6, 7)).sum(),
         "sistema com grafia fora do padrão (minúsculas)": (b.sistema != b.sistema.str.lower()).sum(),
         "anual R$ 239,90 com mais de 365 dias de assinatura": ((b.ultima_cobranca_aprovada_reais == 239.9) & (b.tempo_assinatura_dias > 365)).sum(),
         "tickets pendentes > tickets abertos em 90d (esperado)": (b.tickets_pendentes_corte > b.tickets_90d).sum(),
@@ -115,26 +122,80 @@ def imprimir(titulo, d, fmt="{:>10}"):
         print(f"  {k:60s} " + fmt.format(v))
 
 
+def validar_entradas(clus, base):
+    """Interrompe antes de salvar: chaves, cobertura, domínios e valores finitos."""
+    if len(clus) != 14753 or len(base) != 14753:
+        raise ValueError("Esperados 14.753 pagantes em cada entrada nesta versão do case")
+    for df in (clus, base):
+        ids = df.user_id.astype("string")
+        if ids.isna().any() or not ids.str.fullmatch(r"u_[0-9a-f]{8}").all() or ids.duplicated().any():
+            raise ValueError("Chave ausente, inválida ou duplicada")
+    if set(clus.user_id) != set(base.user_id):
+        raise ValueError("Cobertura das duas bases diverge")
+    if not base.plano.isin(["mensal", "anual"]).all():
+        raise ValueError("Plano ausente ou desconhecido")
+    if not base.canal_cobranca.isin(["app_store", "google_play", "web_cartao", "web_pix"]).all():
+        raise ValueError("Canal ausente ou desconhecido")
+    for df in (clus, base):
+        required = ["treinos_30d", "treinos_90d", "minutos_30d", "minutos_90d",
+                    "dias_ativos_30d", "dias_ativos_90d", "tempo_assinatura_dias"]
+        if df[required].isna().any().any() or not np.isfinite(df[required]).all().all() or (df[required] < 0).any().any():
+            raise ValueError("Medida obrigatória ausente, não finita ou negativa")
+    for col in ["ultima_cobranca_aprovada_reais", "receita_mensal_equivalente_proxy",
+                "receita_liquida_mensal_equivalente_proxy"]:
+        if base[col].isna().any() or not np.isfinite(base[col]).all() or (base[col] <= 0).any():
+            raise ValueError("Valor financeiro ausente, não finito ou não positivo")
+    if not clus.sem_treino_observado_2026.isin([0, 1]).all():
+        raise ValueError("Flag sem treino inválida")
+    for df in (clus, base):
+        prop = df.proporcao_video_90d
+        if (prop.notna() & ~prop.between(0, 1)).any():
+            raise ValueError("Proporção fora de 0 a 1")
+    # Compara as variáveis compartilhadas por chave, sem depender da ordem das linhas.
+    shared = sorted(set(clus.columns) & set(base.columns) - {"user_id"})
+    try:
+        pd.testing.assert_frame_equal(clus.set_index("user_id")[shared].sort_index(),
+                                      base.set_index("user_id")[shared].sort_index(),
+                                      check_dtype=False, check_exact=True)
+    except AssertionError as exc:
+        raise ValueError("Variáveis compartilhadas divergem entre as bases") from exc
+
+
 def main():
     clus, base = carregar()
-    assert set(clus.user_id) == set(base.user_id), "as duas bases precisam ter os mesmos user_id"
-    print(f"Linhas: base de clusterização {len(clus)}; base complementar {len(base)}")
-
+    validar_entradas(clus, base)
+    regras = regras_clusterizacao(clus)
+    formulas = recalculos_base(base)
+    # Uma violação impede produzir uma nova saída que pareça aprovada.
+    if any(regras.values()) or any(formulas.values()):
+        imprimir("Violações na clusterização", regras)
+        imprimir("Violações na base complementar", formulas)
+        raise ValueError("Há inconsistências: nenhuma nova saída foi gravada")
     flags = marcar(clus)
+    summary = {
+        "linhas_entrada_clusterizacao": len(clus), "linhas_entrada_complementar": len(base),
+        "linhas_saida": len(flags), "linhas_excluidas": 0,
+        "regras_clusterizacao": regras, "formulas_base": formulas,
+        "achados_descritivos": achados_novos(base),
+        "ausencias_clusterizacao": clus.isna().sum().to_dict(),
+        "flags": flags.drop(columns="user_id").sum().to_dict(),
+        "ponte_valor": ponte_valor(base),
+        "sha256_entradas": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                            for p in [ENTRADA / "base_clusterizacao.csv", ENTRADA / "base_assinantes_corte.csv"]},
+    }
     SAIDA.mkdir(parents=True, exist_ok=True)
     flags.to_csv(SAIDA / "qualidade_flags.csv", index=False)
-
-    imprimir("Consistência: regras na base de clusterização (esperado 0)", regras_clusterizacao(clus))
-    imprimir("Consistência: fórmulas recalculadas na base complementar (esperado 0)", recalculos_base(base))
-    imprimir("Achados novos", achados_novos(base))
-    print("\nCompletude: vazios por coluna")
-    print(clus.isna().sum()[lambda s: s > 0].to_string())
-    imprimir("Marcações por assinante", flags.drop(columns="user_id").sum().to_dict())
-    imprimir("Ponte de valor (equivalente mensal, R$)", ponte_valor(base), "{:>14,.2f}")
-    print("\nPonte de filtros: 14.753 pagantes; "
-          f"{int(flags.sem_treino_90d.sum())} sem treino em 90 dias; "
-          f"{int((flags.sem_treino_90d == 0).sum())} para o algoritmo")
-    print(f"\nMarcações salvas em {SAIDA.relative_to(ROOT)}/qualidade_flags.csv (fora do Git)")
+    (SAIDA / "resumo_qualidade.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2, default=lambda v: v.item()) + "\n")
+    imprimir("Regras da clusterização (esperado 0)", regras)
+    imprimir("Fórmulas complementares (esperado 0)", formulas)
+    imprimir("Características e achados para investigação", summary["achados_descritivos"])
+    imprimir("Ausências na clusterização", summary["ausencias_clusterizacao"])
+    imprimir("Marcações por assinante", summary["flags"])
+    imprimir("Ponte de valor (proxy equivalente mensal, R$)", summary["ponte_valor"], "{:>14,.2f}")
+    print(f"\nPonte: {len(clus)} pagantes na entrada → {len(flags)} na saída; zero excluídos.")
+    print("Sem treino é característica observada; todos continuam disponíveis à segmentação.")
+    print(f"Saídas locais em {SAIDA.relative_to(ROOT)}; limiares exploratórios não comprovam erro.")
 
 
 if __name__ == "__main__":

@@ -197,7 +197,7 @@ def main():
     ponte.append({"etapa": "após tratamento de ausências e escala (nenhuma linha removida)", "linhas": len(x)})
     z = padronizar(x)
 
-    varredura = varrer_k(z, ks=[args.k] if args.k else range(2, 9))
+    varredura = varrer_k(z)  # mesma sequência aleatória publicada, inclusive com --k
     varredura.to_csv(SAIDAS / "varredura_k.csv", index=False)
     pd.DataFrame(decisoes).to_csv(SAIDAS / "tratamentos_variaveis.csv", index=False)
     print(varredura.round(3).to_string(index=False))

@@ -1,0 +1,35 @@
+{
+  "data_revisao": "2026-11-07",
+  "corte": "2026-09-30",
+  "pagantes": 14753,
+  "segmentos": [
+    2783,
+    4315,
+    4793,
+    2862
+  ],
+  "testes": 50,
+  "comparacoes_amostras": {
+    "12": {
+      "total": 204,
+      "concordantes": 204
+    },
+    "96": {
+      "total": 1632,
+      "concordantes": 1632
+    }
+  },
+  "silhueta_k4": 0.16891781193637484,
+  "ari_medio_k4": 0.9901363727340694,
+  "cenario_aniversario_anuais": 439,
+  "cenario_aniversario_proxy": 9539.3,
+  "contribuicao_equivalente_mes": 343576.72,
+  "brutos_preservados": true,
+  "submetido_ao_curso": false,
+  "revisao": "Codex por delegação de John; aprovação externa GitHub necessária",
+  "arquivos": {
+    "Vitaliza_S5_Cartoes_Personas.pdf": "3bb0e5143cb067e1cceebefc91827970e3972c801d1171eea521a5088e1abe76",
+    "Vitaliza_S5_Executivo_v2.pptx": "314e278ef6e253391c82aac95edf2fa1061b4161f0be950ff55e3c564c2517b5",
+    "Vitaliza_S5_Relatorio_Executivo.pdf": "2e5b4166b7f43d0a9400df3f357e5547320a282ed83e59261beadca7b5934079"
+  }
+}

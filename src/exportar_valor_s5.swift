@@ -80,14 +80,15 @@ func table(_ lines: [String]) {
     if n==3 { shares = [0.25,0.53,0.22] }
     if n==4 { shares = [0.25,0.25,0.25,0.25] }
     if n==6 { shares = [0.15,0.37,0.12,0.13,0.13,0.10] }
+    if n==6 && first.first=="Persona" { shares = [0.20,0.11,0.18,0.16,0.18,0.17] }
     if first.first=="Dimensão" { shares = [0.15,0.43,0.12,0.16,0.14] }
     if first.first=="Fonte" { shares = [0.20,0.64,0.16] }
     if n==2 { shares = [0.63,0.37] }
-    func rowHeight(_ row: [String]) -> CGFloat {
-        zip(row, shares).map { measured(attributed($0.0, size: 7.9), usable*$0.1-12) }.max()!+14
+    func rowHeight(_ row: [String], header: Bool = false) -> CGFloat {
+        zip(row, shares).map { measured(attributed($0.0, size: 7.9, bold: header), usable*$0.1-12) }.max()!+14
     }
     func render(_ row: [String], header: Bool) {
-        let height = rowHeight(row)
+        let height = rowHeight(row, header: header)
         var x = margin
         for (idx,cell) in row.enumerated() {
             let cw=usable*shares[idx]
@@ -100,7 +101,7 @@ func table(_ lines: [String]) {
         }
         y += height
     }
-    ensure(rowHeight(first)+rowHeight(rows.count>1 ? rows[1] : first))
+    ensure(rowHeight(first, header: true)+rowHeight(rows.count>1 ? rows[1] : first))
     render(first,header:true)
     for row in rows.dropFirst() {
         if y+rowHeight(row)>h-53 { beginPage(); render(first,header:true) }
@@ -120,7 +121,7 @@ while i<lines.count {
         table(block)
         continue
     }
-    if !line.isEmpty {
+    if !line.isEmpty && !line.hasPrefix("<!--") {
         if line.hasPrefix("# ") { paragraph(String(line.dropFirst(2)),level:1) }
         else if line.hasPrefix("## ") { paragraph(String(line.dropFirst(3)),level:2) }
         else { paragraph(line) }
